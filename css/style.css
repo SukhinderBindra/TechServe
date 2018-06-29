@@ -1,0 +1,84 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+input::-webkit-input-placeholder {
+  color: #666;
+}
+
+input:-moz-placeholder {
+  color: #666;
+}
+
+input:-ms-input-placeholder {
+  color: #666;
+}
+
+body {
+  font-family: Helvetica,sans-serif;
+  font-size: 22px;
+}
+
+.iphone-wrap {
+  background: url(../img/iphone-frame.jpg);
+  width: 820px;
+  height: 1642px;
+  padding: 369px 200px 200px 109px;
+  font-size: 26px;
+}
+
+.responsive-wrap {
+  width: 640px;
+  height: 930px;
+  position: relative;
+  padding: 0 0 0 0;
+  overflow: hidden;
+}
+
+.responsive-form-wrap {
+  width: 640px;
+  height: 930px;
+  background: rgba(54, 54, 54, 0.7);
+  border: 1px solid #767676;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5), 0 0 4px 0px rgba(255, 255, 255, 0.5) inset, 0 0 4px 0px rgba(255, 255, 255, 0.5), 0 0 65px 25px rgba(255, 255, 255, 0.14);
+}
+
+.card-holder-wrap {
+  margin: 25px auto 40px auto;
+  width: 145px;
+  position: relative;
+}
+
+.responsive-form {
+  background: #fff;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background: url(../img/iphone-canvas.png) no-repeat;
+  background-size: 640px 930px;
+}
+
+.freeb {
+  margin: 0 auto 40px auto;
+  width: 253px;
+  height: 65px;
+  display: block;
+}
+
+.input-wrap {
+  border: 1px solid #dbdbdb;
+  height: 142px;
+  border-radius: 15px;
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.13) inset;
+  background: #fff;
+}
+
+
+.form-hr {
+  border: none;
+  border-top: 1px solid #dbdbdb;
+}
+

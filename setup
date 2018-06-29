@@ -1,0 +1,83 @@
+#!/bin/ksh
+
+export PROJECT_NAME="TechPlanner"
+export IMAGE_DIR=img
+export LOGO1024=Logo1024x1024.png
+export IMAGE_FILE="$IMAGE_DIR/$LOGO1024"
+
+if  [ ! -f $IMAGE_FILE ]
+then
+    echo "Error: $IMAGE_FILE file not found."
+    exit 1
+fi
+
+
+#----------------#
+# Android Images #
+#----------------#
+sips -Z 36  $IMAGE_FILE --out $IMAGE_DIR/android_ldpi.png
+sips -Z 48  $IMAGE_FILE --out $IMAGE_DIR/android_mdpi.png
+sips -Z 72  $IMAGE_FILE --out $IMAGE_DIR/android_hdpi.png
+sips -Z 96  $IMAGE_FILE --out $IMAGE_DIR/android_xhdpi.png
+sips -Z 144 $IMAGE_FILE --out $IMAGE_DIR/android_xxhdpi.png
+sips -Z 192 $IMAGE_FILE --out $IMAGE_DIR/android_xxxhdpi.png
+
+
+
+#------------#
+# iOS Images #
+#------------#
+
+sips -Z 180 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-60@3x.png  
+sips -Z  60 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-60.png  
+sips -Z 120 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-60@2x.png  
+sips -Z  76 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-76.png  
+sips -Z 152 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-76@2x.png  
+sips -Z  40 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-40.png  
+sips -Z  80 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-40@2x.png  
+sips -Z  57 $IMAGE_FILE --out $IMAGE_DIR/ios_icon.png  
+sips -Z 114 $IMAGE_FILE --out $IMAGE_DIR/ios_icon@2x.png  
+sips -Z  72 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-72.png  
+sips -Z 144 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-72@2x.png  
+sips -Z  29 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-small.png  
+sips -Z  58 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-small@2x.png  
+sips -Z  87 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-small@3x.png  
+sips -Z  50 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-50.png  
+sips -Z 100 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-50@2x.png  
+sips -Z 167 $IMAGE_FILE --out $IMAGE_DIR/ios_icon-83.5@2x.png  
+
+
+sips -s format bmp -Z 300  $IMAGE_FILE --out $IMAGE_DIR/tempfile300.bmp
+sips -s format bmp -Z 600  $IMAGE_FILE --out $IMAGE_DIR/tempfile600.bmp
+sips -s format bmp -Z 700  $IMAGE_FILE --out $IMAGE_DIR/tempfile700.bmp
+sips -s format bmp -Z 1000 $IMAGE_FILE --out $IMAGE_DIR/tempfile1000.bmp
+sips -s format bmp -Z 1500 $IMAGE_FILE --out $IMAGE_DIR/tempfile1500.bmp
+
+
+sips $IMAGE_DIR/tempfile300.bmp -s format png --padToHeightWidth  480  320   --padColor FFFFFF --out $IMAGE_DIR/Default~iphone.png
+
+sips $IMAGE_DIR/tempfile600.bmp -s format png --padToHeightWidth  960  640   --padColor FFFFFF --out $IMAGE_DIR/Default@2x~iphone.png
+sips $IMAGE_DIR/tempfile600.bmp -s format png --padToHeightWidth 1136  640   --padColor FFFFFF --out $IMAGE_DIR/Default-568h@2x~iphone.png
+
+sips $IMAGE_DIR/tempfile700.bmp -s format png --padToHeightWidth 1024  768   --padColor FFFFFF --out $IMAGE_DIR/Default-Portrait~ipad.png
+sips $IMAGE_DIR/tempfile700.bmp -s format png --padToHeightWidth  768 1024   --padColor FFFFFF --out $IMAGE_DIR/Default-Landscape~ipad.png
+sips $IMAGE_DIR/tempfile700.bmp -s format png --padToHeightWidth 1334  750   --padColor FFFFFF --out $IMAGE_DIR/Default-667h.png
+
+sips $IMAGE_DIR/tempfile1000.bmp -s format png --padToHeightWidth 2208 1242  --padColor FFFFFF --out $IMAGE_DIR/Default-736h.png
+sips $IMAGE_DIR/tempfile1000.bmp -s format png --padToHeightWidth 1242 2208  --padColor FFFFFF --out $IMAGE_DIR/Default-Landscape-736h.png
+
+sips $IMAGE_DIR/tempfile1500.bmp -s format png --padToHeightWidth 2048 1536  --padColor FFFFFF --out $IMAGE_DIR/Default-Portrait@2x~ipad.png
+sips $IMAGE_DIR/tempfile1500.bmp -s format png --padToHeightWidth 1536 2048  --padColor FFFFFF --out $IMAGE_DIR/Default-Landscape@2x~ipad.png
+
+
+#--------------#
+# Google Store #
+#--------------#
+sips -Z 512  $IMAGE_FILE --out $IMAGE_DIR/google-store-hi-res-icon-512x512.png
+sips $IMAGE_DIR/tempfile700.bmp -s format png --padToHeightWidth 500 1024  --padColor FFFFFF --out $IMAGE_DIR/google-store-feature-graphic.png
+
+rm -f $IMAGE_DIR/tempfile300.bmp
+rm -f $IMAGE_DIR/tempfile600.bmp
+rm -f $IMAGE_DIR/tempfile700.bmp
+rm -f $IMAGE_DIR/tempfile1000.bmp
+rm -f $IMAGE_DIR/tempfile1500.bmp

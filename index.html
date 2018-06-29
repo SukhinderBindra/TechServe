@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src * gap: ws: https://ssl.gstatic.com;style-src * 'unsafe-inline' 'self' data: blob:;script-src * 'unsafe-inline' 'unsafe-eval' data: blob:;img-src * data: 'unsafe-inline' 'self' content:;">
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>Hello World</title>
+
+
+        <!-- Axis Apps Stuff Starts Here -->
+
+        <style>
+
+
+            .modal-open .modal {
+               overflow-y: auto;
+               margin: 0 auto;
+            }
+
+            .navbar-fixed-left {
+               position: fixed;
+               border-radius: 0;
+               display: inline-block;
+               height: 100%;
+               margin-left:0px;
+            }
+
+            .navbar-custom1 .nav > li > a:focus,
+            .navbar-custom1 .nav > li > a:hover,
+
+            .navbar-fixed-left .navbar-nav > li {
+               float: none;  
+            }
+
+            .navbar-fixed-left + .container-fluid{
+               padding-left: 40px;
+            }
+
+            .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+              margin-left: 40px;
+            }
+
+           .videoWrapper {
+              position: relative;
+              padding-bottom: 56.25%; /* 16:9 */
+              padding-top: 25px;
+              height: 0;
+           }
+           .videoWrapper iframe {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              max-height: 750px;
+           }
+      
+        </style>
+
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/Jcrop.min.css">
+        <link rel="stylesheet" href="css/axisapi-style.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/bootstrap-table.css">
+        <link rel="stylesheet" href="css/ratingStars.css">
+        <link rel="stylesheet" href="css/bootstrap-colorpicker.min.css">
+        <link rel="stylesheet" href="css/fontawesome-iconpicker.min.css">
+        <link rel="stylesheet" href="css/signature-pad.css">
+
+    </head>
+
+    <body id="mainBody" style="padding-top:50px; height:100%; width:100%;">
+
+        <div id="mainDiv" style="height:100%; width:100%; overflow-x:visible;"> 
+            <div style="transform:translate(0%, 100%);text-align:center;height:100%; width:100%;padding-left:15px; padding-right:15px;" >
+              <center style="text-align:center;height:100%; width:100%">
+                <h3 id="splashDiv" class="rounded" style="color:#124DA3;top:40%;height:100%;background-color:#000">
+                  <br>
+                  <span id="websiteName">Website Name</span>
+                  <br>
+                  <span id="pleaseWait" style="text-decoration:blink;font-size: 50%" >Please Wait...</span>
+                  <br> <br>
+                </h3>
+              </center>
+            </div>
+        </div>
+
+
+
+        <div class="dark_toast centered"  style="display:none" id="dark_toast">Toast Message!</div>
+        <div class="light_toast centered" style="display:none" id="light_toast">Toast Message!</div>
+
+        <div id="breadcrumbsModal" class="modal fade" role="dialog">
+          <div class="modal-dialog" style="margin-top:25%;margin-left:25px;margin-right:25px;">
+            <div class="modal-content">
+              <div id="breadCrumbsHeaderDiv" class="modal-header">
+                <button id="breadcrumbCloseButton" type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Breadcrumbs</h3>
+              </div>
+              <div id="breadcrumbsBody" class="modal-body" >
+              </div>
+              <div id="breadcrumbsFooter" class="modal-footer">
+                <button id="breadcrumbsButton" type="button" class="btn btn-default pull-right" data-dismiss="modal"><b>Close</b></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="centered" style="display:none; position:fixed; top:50%;XXXtransform:XXXtranslate(50%, 25px);" id="axis_spinner"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>
+
+        <script src="js/external/jquery.js"></script>
+        <script src="js/external/jquery-ui.js"></script>
+        <script src="js/external/bootstrap.min.js"></script>
+        <script src="js/external/bootstrap-table.js"></script>
+        <script src="js/external/bootstrap-select.js"></script>
+        <script src="js/external/Jcrop.min.js"></script>
+        <script src="js/external/bootstrap-colorpicker.js"></script>
+        <script src="js/external/fontawesome-iconpicker.min.js"></script>
+  
+        <script src="js/external/raphael.min.js"></script>
+        <script src="js/external/sea.min.js"></script>
+        <script src="js/external/infoviz.js"></script>
+        <script src="js/external/signature_pad.js"></script>
+  
+        <script src="js/axis/control/axisAppsScreens.js"></script>
+        <script src="js/axis/control/axisAppsLoad.js"></script>
+        <script src="js/axis/control/axisAppsDataFactory.js"></script>
+        <script src="js/axis/control/axisAppsScreenBundles.js"></script>
+        <script src="js/axis/control/axisAppsScreenStack.js"></script>
+        <script src="js/axis/control/login.js"></script>
+        <script src="js/axis/control/loginMobile.js"></script>
+  
+        <script src="js/axis/elements/inputText.js"></script>
+        <script src="js/axis/elements/inputTextArea.js"></script>
+        <script src="js/axis/elements/inputEmail.js"></script>
+        <script src="js/axis/elements/inputPhone.js"></script>
+        <script src="js/axis/elements/inputTime.js"></script>
+        <script src="js/axis/elements/inputDate.js"></script>
+        <script src="js/axis/elements/inputColor.js"></script>
+        <script src="js/axis/elements/inputPassword.js"></script>
+        <script src="js/axis/elements/inputPin.js"></script>
+        <script src="js/axis/elements/inputNumber.js"></script>
+        <script src="js/axis/elements/inputZip.js"></script>
+        <script src="js/axis/elements/inputCity.js"></script>
+        <script src="js/axis/elements/inputState.js"></script>
+        <script src="js/axis/elements/inputGPSLocation.js"></script>
+        <script src="js/axis/elements/inputLike.js"></script>
+        <script src="js/axis/elements/inputIcon.js"></script>
+        <script src="js/axis/elements/chartPie.js"></script>
+        <script src="js/axis/elements/chartBar.js"></script>
+        <script src="js/axis/elements/htmlSignature.js"></script>
+        <script src="js/axis/elements/inputAutocomplete.js"></script>
+        <script src="js/axis/elements/htmlStripe.js"></script>
+  
+        <script src="js/axis/elements/htmlDivider.js"></script>
+        <script src="js/axis/elements/htmlHidden.js"></script>
+        <script src="js/axis/elements/htmlLabel.js"></script>
+        <script src="js/axis/elements/htmlDropdown.js"></script>
+        <script src="js/axis/elements/htmlRadioButtons.js"></script>
+        <script src="js/axis/elements/htmlCheckBox.js"></script>
+        <script src="js/axis/elements/htmlImage.js"></script>
+        <script src="js/axis/elements/htmlPage.js"></script>
+        <script src="js/axis/elements/htmlImageCarousel.js"></script>
+        <script src="js/axis/elements/htmlLaunchPad.js"></script>
+        <script src="js/axis/elements/htmlButton.js"></script>
+        <script src="js/axis/elements/htmlDownloadDoc.js"></script>
+        <script src="js/axis/elements/htmlCardsList.js"></script>
+        <script src="js/axis/elements/htmlImageUpload.js"></script>
+        <script src="js/axis/elements/htmlToggleButton.js"></script>
+        <script src="js/axis/elements/htmlOpenMap.js"></script>
+        <script src="js/axis/elements/htmlOpenPhone.js"></script>
+        <script src="js/axis/elements/htmlOpenEmail.js"></script>
+  
+        <script src="js/axis/elements/ratingStars.js"></script>
+        <script src="js/axis/elements/googleMap.js"></script>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="appRules.js"></script>
+
+        <script>
+
+            var runMode="dev";
+            var isMobile="Y";
+            var debugMode="Y";
+            var domainName="none.com";
+            var googleMapsKey=appRules.googleMapsKey;
+            var googleMapsReady  = "N";
+            var elementDataTypes = {};
+
+            $("#mainBody").css("background-color", "#" + appRules.backgroundColor);
+            $("#mainBody").css("background-image", "url('" + appRules.backgroundImage + "\')" );           
+
+            $("#splashDiv").css("background-color", "#" + appRules.headerBgColor);
+            $("#websiteName").css("color", "#" + appRules.headerTextColor);
+            $("#websiteName").value = appRules.webSiteName;
+            $("#pleaseWait").css("color", "#" + appRules.headerTextColor);
+
+
+            window.onload=init;
+
+        </script>
+    </body>
+</html>
